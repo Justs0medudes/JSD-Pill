@@ -2,39 +2,30 @@
 
 #include "PrinterData.h"
 
-const RawPrinterData fakeRawData = {
-    .klipperState = "ready",
+RawPrinterData getFakePrinterData() {
+    RawPrinterData data;
 
-    .livePosition = {120.0f, 80.0f, 5.0f},
+    data.klipperState = "ready";
 
-    .speed = 100.0f,
-    .extrudeSpeed = 5.0f,
+    data.livePosition[0] = 125.4;
+    data.livePosition[1] = 87.2;
+    data.livePosition[2] = 12.6;
 
-    .extruderTemp = 185.0f,
-    .extruderTempTarget = 200.0f,
+    data.speed = 60.0;
+    data.extrudeSpeed = 5.0;
 
-    .bedTemp = 58.0f,
-    .bedTempTarget = 60.0f,
+    data.extruderTemp = 205.3;
+    data.extruderTempTarget = 210.0;
 
-    .fanSpeed = 0.65f,
+    data.bedTemp = 58.7;
+    data.bedTempTarget = 60.0;
 
-    .totalDuration = 5420.0f,
-    .printDuration = 3180.0f,
+    data.fanSpeed = 0.45;
 
-    .printState = "printing"
-};
+    data.totalDuration = 3600.0;
+    data.printDuration = 1420.0;
 
-const DerivedPrinterData fakeDerivedData = {
-    .extruderHeating = true,
-    .extruderAtTarget = false,
+    data.printState = "printing";
 
-    .bedHeating = true,
-    .bedAtTarget = false,
-
-    .isPrinting = true,
-    .isPaused = false,
-    .isComplete = false,
-    .hasError = false,
-
-    .remainingPrintTime = 60.0f
-};
+    return data;
+}

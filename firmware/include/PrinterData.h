@@ -21,6 +21,7 @@ struct RawPrinterData {
 
     float totalDuration;
     float printDuration;
+    float estimatedDuration; // M73 slicer estimate returned by moonraker, unit in seconds
 
     String printState; // standby, printing, paused, complete, error, cancelled
 
@@ -28,11 +29,11 @@ struct RawPrinterData {
 
 // Printer data derived from raw data
 struct DerivedPrinterData {
-    bool extruderHeating;
-    bool extruderAtTarget;
+    String extruderStatus; // "heating", "cooling", "atTarget"
+    float extruderHeatingRate;
 
-    bool bedHeating;
-    bool bedAtTarget;
+    String bedStatus; // "heating", "cooling", "atTarget"
+    float bedHeatingRate;
     
     bool isPrinting;
     bool isPaused;
@@ -41,4 +42,15 @@ struct DerivedPrinterData {
 
     float remainingPrintTime;
 
+};
+
+class RawDataProcessor {
+public:
+    DerivedPrinterData process(const RawPrinterData& raw);
+    void addTemp(float tempList[], int size, float newTemp);
+    
+private:
+    float extruderTempList[6];
+    float bedTempList[6];
+    unsigned long previousTempTime;
 };
