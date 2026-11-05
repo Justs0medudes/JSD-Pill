@@ -47,10 +47,17 @@ struct DerivedPrinterData {
 class RawDataProcessor {
 public:
     DerivedPrinterData process(const RawPrinterData& raw);
-    void addTemp(float tempList[], int size, float newTemp);
     
 private:
-    float extruderTempList[6];
-    float bedTempList[6];
-    unsigned long previousTempTime;
+    static constexpr int tempListLength = 6;
+    static constexpr float updateInterval = 2.0;
+    static constexpr float extruderTempRateThreshold = 0.5;
+    static constexpr float bedTempRateThreshold = 0.2;
+
+    bool initialized = false;
+    
+    float extruderTempList[tempListLength];
+    float bedTempList[tempListLength];
+
+    void addTemp(float tempList[], int size, float newTemp);
 };

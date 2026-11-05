@@ -3,7 +3,25 @@
 #include "PrinterData.h"
 
 RawPrinterData getFakePrinterData() {
-    RawPrinterData data;
+    static RawPrinterData data;
+
+    static float extruderTemp = 180.0;
+    static float bedTemp = 45.0;
+
+    static int tick = 0;
+
+    // Simulate temperature rising
+    extruderTemp += 3.0;
+    bedTemp += 1.0;
+
+    // Stop at target
+    if (extruderTemp > 210.0) {
+        extruderTemp = 210.0;
+    }
+
+    if (bedTemp > 60.0) {
+        bedTemp = 60.0;
+    }
 
     data.klipperState = "ready";
 
@@ -14,18 +32,20 @@ RawPrinterData getFakePrinterData() {
     data.speed = 60.0;
     data.extrudeSpeed = 5.0;
 
-    data.extruderTemp = 205.3;
+    data.extruderTemp = extruderTemp;
     data.extruderTempTarget = 210.0;
 
-    data.bedTemp = 58.7;
+    data.bedTemp = bedTemp;
     data.bedTempTarget = 60.0;
 
     data.fanSpeed = 0.45;
 
     data.totalDuration = 3600.0;
-    data.printDuration = 1420.0;
+    data.printDuration = tick * 2.0;
 
     data.printState = "printing";
+
+    tick++;
 
     return data;
 }
