@@ -1,5 +1,6 @@
 #include <Arduino.h>
-#include <TFT_eSPI.h>
+#include <LovyanGFX.hpp>
+#include "display.hpp"
 // #include "PrinterData.h"
 // #include "FakeData.h"
 #include "gfx_fonts/JetBrainsMono_Regular48pt7b.h"
@@ -7,10 +8,7 @@
 #include "gfx_fonts/JetBrainsMono_Regular36pt7b.h"
 #include "gfx_images/ready.h"
 
-TFT_eSPI tft = TFT_eSPI();
-
 // RawDataProcessor processor;
-
 // unsigned long lastUpdate = 0;
 
 int width = 72;
@@ -28,7 +26,7 @@ void setup()
     tft.fillScreen(TFT_BLACK); // black
 
     tft.setTextColor(TFT_WHITE);
-    tft.setFreeFont(&JetBrainsMono_Regular36pt7b);
+    tft.setFont(&JetBrainsMono_Regular36pt7b);
     tft.setTextDatum(MC_DATUM);
 }
 

@@ -1,4 +1,4 @@
-#include "PrinterData.h"
+#include "printerdata.h"
 
 void RawDataProcessor::addTemp(float tempList[], int size, float newTemp) {
     for (int i = 0; i < size - 1; i++) {

@@ -1,6 +1,6 @@
 #pragma once
 
-#include "PrinterData.h"
+#include "printerdata.h"
 
 RawPrinterData getFakePrinterData() {
     static RawPrinterData data;
