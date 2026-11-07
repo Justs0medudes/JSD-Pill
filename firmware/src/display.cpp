@@ -31,11 +31,11 @@ LGFX::LGFX() {
         cfg.pin_cs = 1;
         cfg.pin_rst = 3;
 
-        cfg.panel_width = 240;
-        cfg.panel_height = 135;
+        cfg.panel_width = 135;
+        cfg.panel_height = 240;
 
-        cfg.offset_x = 0;
-        cfg.offset_y = 0;
+        cfg.offset_x = 52;
+        cfg.offset_y = 40;
 
         cfg.invert = true;
         cfg.rgb_order = false;

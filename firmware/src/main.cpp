@@ -3,9 +3,7 @@
 #include "display.hpp"
 // #include "PrinterData.h"
 // #include "FakeData.h"
-#include "gfx_fonts/JetBrainsMono_Regular48pt7b.h"
-#include "gfx_fonts/JetBrainsMono_Regular40pt7b.h"
-#include "gfx_fonts/JetBrainsMono_Regular36pt7b.h"
+#include "gfx_fonts/gfx_fonts.h"
 #include "gfx_images/ready.h"
 
 // RawDataProcessor processor;
@@ -13,6 +11,35 @@
 
 int width = 72;
 int height = 72;
+
+const GFXfont* fontList[] = {
+    &JetbrainsMono_Regular6pt,
+    &JetbrainsMono_Regular8pt,
+    &JetbrainsMono_Regular10pt,
+    &JetbrainsMono_Regular12pt,
+    &JetbrainsMono_Regular14pt,
+    &JetbrainsMono_Regular16pt,
+    &JetbrainsMono_Regular18pt,
+    &JetbrainsMono_Regular20pt,
+    &JetbrainsMono_Regular22pt,
+    &JetbrainsMono_Regular24pt,
+    &JetbrainsMono_Regular26pt,
+    &JetbrainsMono_Regular28pt,
+    &JetbrainsMono_Regular36pt,
+    &JetbrainsMono_Regular48pt
+};
+
+const char* pages[] = {
+    "\xB0 \xB1 \xB2",
+    "\xB3 \xB5 \xB8",
+    "\xB9 \xBA \xBB",
+    "\xBC \xBD \xBE",
+    "\xBF"
+};
+
+const int fontCount = sizeof(fontList) / sizeof(fontList[0]);
+const int pageCount = sizeof(pages) / sizeof(pages[0]);
+
 
 void setup()
 {
@@ -26,24 +53,34 @@ void setup()
     tft.fillScreen(TFT_BLACK); // black
 
     tft.setTextColor(TFT_WHITE);
-    tft.setFont(&JetBrainsMono_Regular36pt7b);
     tft.setTextDatum(MC_DATUM);
 }
 
 void loop()
 {
-    tft.setSwapBytes(true);
-    tft.pushImage(0, 31, width, height, squintingBitmap);
-    tft.pushImage(84, 31, width, height, sleepingBitmap);
-    tft.pushImage(168, 31, width, height, sleepyBitmap);
-    delay(3000);
-    tft.fillScreen(TFT_BLACK);
+    // tft.setSwapBytes(true);
+    // tft.pushImage(0, 31, width, height, squintingBitmap);
+    // tft.pushImage(84, 31, width, height, sleepingBitmap);
+    // tft.pushImage(168, 31, width, height, sleepyBitmap);
+    // delay(3000);
+    // tft.fillScreen(TFT_BLACK);
 
-    tft.drawString("215°C", 120, 67);
-    delay(3000);
-    tft.fillScreen(TFT_BLACK);
+    for (int p = 0; p < pageCount; p++) {
+
+        for (int f = 0; f < fontCount; f++) {
+
+            tft.fillScreen(TFT_BLACK);
+
+            tft.setFreeFont(fontList[f]);
+
+            tft.drawString(pages[p], 120, 67);
+
+            delay(500);
+        }
+    }
+
     // if (millis() - lastUpdate >= 2000) {
-    //     lastUpdate = millis();
+    //     lastUpdate = millis();lma
 
     //     // Get the next fake printer snapshot
     //     RawPrinterData raw = getFakePrinterData();
